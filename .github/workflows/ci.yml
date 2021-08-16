@@ -51,6 +51,9 @@ jobs:
       - name: build
         run: yarn build
 
+      - name: nuxt generate
+        run: yarn generate
+
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
         env:
