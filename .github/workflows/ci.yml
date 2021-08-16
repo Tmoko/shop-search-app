@@ -48,10 +48,9 @@ jobs:
       - name: Run linter 👀
         run: yarn lint
 
-      - name: npm install and build
-        run: |
-          npm ci
-          yarn build
+      - name: build
+        run: yarn build
+
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
         env:
