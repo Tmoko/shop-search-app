@@ -49,14 +49,14 @@ jobs:
         run: yarn lint
 
       - name: npm install and build
-      - run: npm ci
-      - run: yarn build --if-present
-      - run: yarn test
-
-      - name: Publish
+        run: |
+          npm ci
+          yarn build
+      - name: Deploy to netlify
         uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=./dist --prod
-          env:
-            NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-            NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
